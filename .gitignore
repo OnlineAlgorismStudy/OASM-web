@@ -175,5 +175,6 @@ $RECYCLE.BIN/
 # Uncomment the following lines if you're not using Zero-Installs:
 # .yarn/cache
 # .pnp.*
+build
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,node,yarn,react
