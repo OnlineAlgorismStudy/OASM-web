@@ -1,3 +1,4 @@
+![GitHub](https://img.shields.io/github/license/OnlineAlgorismStudy/OASM-web)
 ![GitHub contributors](https://img.shields.io/github/contributors/OnlineAlgorismStudy/OASM-web)
 ![GitHub last commit](https://img.shields.io/github/last-commit/OnlineAlgorismStudy/OASM-web)
 ![GitHub forks](https://img.shields.io/github/forks/OnlineAlgorismStudy/OASM-web?style=social)
