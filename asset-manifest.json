@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/OASM-web/static/css/main.d498bfb3.chunk.css",
+    "main.js": "/OASM-web/static/js/main.e5dc79c6.chunk.js",
+    "main.js.map": "/OASM-web/static/js/main.e5dc79c6.chunk.js.map",
+    "runtime-main.js": "/OASM-web/static/js/runtime-main.c07762c1.js",
+    "runtime-main.js.map": "/OASM-web/static/js/runtime-main.c07762c1.js.map",
+    "static/js/2.cb52d844.chunk.js": "/OASM-web/static/js/2.cb52d844.chunk.js",
+    "static/js/2.cb52d844.chunk.js.map": "/OASM-web/static/js/2.cb52d844.chunk.js.map",
+    "index.html": "/OASM-web/index.html",
+    "precache-manifest.3e99dc5d163265bad3f81aad999631ef.js": "/OASM-web/precache-manifest.3e99dc5d163265bad3f81aad999631ef.js",
+    "service-worker.js": "/OASM-web/service-worker.js",
+    "static/css/main.d498bfb3.chunk.css.map": "/OASM-web/static/css/main.d498bfb3.chunk.css.map",
+    "static/js/2.cb52d844.chunk.js.LICENSE.txt": "/OASM-web/static/js/2.cb52d844.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c07762c1.js",
+    "static/js/2.cb52d844.chunk.js",
+    "static/css/main.d498bfb3.chunk.css",
+    "static/js/main.e5dc79c6.chunk.js"
+  ]
+}
