@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/OASM-web/static/css/main.d498bfb3.chunk.css",
-    "main.js": "/OASM-web/static/js/main.fc23c6d7.chunk.js",
-    "main.js.map": "/OASM-web/static/js/main.fc23c6d7.chunk.js.map",
+    "main.css": "/OASM-web/static/css/main.5f361e03.chunk.css",
+    "main.js": "/OASM-web/static/js/main.062efacb.chunk.js",
+    "main.js.map": "/OASM-web/static/js/main.062efacb.chunk.js.map",
     "runtime-main.js": "/OASM-web/static/js/runtime-main.c07762c1.js",
     "runtime-main.js.map": "/OASM-web/static/js/runtime-main.c07762c1.js.map",
-    "static/js/2.ff4f2f27.chunk.js": "/OASM-web/static/js/2.ff4f2f27.chunk.js",
-    "static/js/2.ff4f2f27.chunk.js.map": "/OASM-web/static/js/2.ff4f2f27.chunk.js.map",
+    "static/js/2.f3f821e4.chunk.js": "/OASM-web/static/js/2.f3f821e4.chunk.js",
+    "static/js/2.f3f821e4.chunk.js.map": "/OASM-web/static/js/2.f3f821e4.chunk.js.map",
     "index.html": "/OASM-web/index.html",
-    "precache-manifest.549e169903b9f59306ed9a1be06393e9.js": "/OASM-web/precache-manifest.549e169903b9f59306ed9a1be06393e9.js",
+    "precache-manifest.225be0dc4530e14af8df04a0cb37cdce.js": "/OASM-web/precache-manifest.225be0dc4530e14af8df04a0cb37cdce.js",
     "service-worker.js": "/OASM-web/service-worker.js",
-    "static/css/main.d498bfb3.chunk.css.map": "/OASM-web/static/css/main.d498bfb3.chunk.css.map",
-    "static/js/2.ff4f2f27.chunk.js.LICENSE.txt": "/OASM-web/static/js/2.ff4f2f27.chunk.js.LICENSE.txt"
+    "static/css/main.5f361e03.chunk.css.map": "/OASM-web/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.f3f821e4.chunk.js.LICENSE.txt": "/OASM-web/static/js/2.f3f821e4.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/OASM-web/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.c07762c1.js",
-    "static/js/2.ff4f2f27.chunk.js",
-    "static/css/main.d498bfb3.chunk.css",
-    "static/js/main.fc23c6d7.chunk.js"
+    "static/js/2.f3f821e4.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.062efacb.chunk.js"
   ]
 }
