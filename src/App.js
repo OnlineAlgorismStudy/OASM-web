@@ -20,9 +20,13 @@ export default () => {
 
     database.ref("files").on("value", (data) => {
       Object.keys(data.val()).forEach((key) => {
-        if (key.match(moment().format("MMDD"))) {
-          console.log(data.val()[key]);
+        const file = data.val()[key];
+        if (file.date.match(moment().format("YYYY-MM-DD"))) {
+          console.log(file);
         }
+        // if (file.match(moment().format("MMDD"))) {
+        //   console.log(file);
+        // }
       });
     });
   }, []);
