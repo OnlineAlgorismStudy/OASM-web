@@ -1,45 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import _ from "lodash";
 import moment from "moment";
-import * as firebase from "firebase/app";
 
-// Add the Firebase services that you want to use
-import "firebase/database";
+import { useDispatch, useSelector } from "react-redux";
+import { SUCCESS } from "utils/redux";
+import { userAction } from "redux/modules/user";
+import { fileAction } from "redux/modules/file";
 
 export default () => {
-  const database = firebase.database();
+  const dispatch = useDispatch();
 
-  const [users, setUsers] = useState([]);
+  const users = useSelector((store) => store.user.users);
+  const files = useSelector((store) => store.file.files);
+
   const [complates, setComplates] = useState([]);
   const [notComplates, setNotComplates] = useState([]);
 
   useEffect(() => {
-    database.ref("users").once("value", (data) => setUsers(data.toJSON()));
-  }, [database]);
+    dispatch(userAction());
+    dispatch(fileAction({ date: moment().format("YYYY-MM-DD") }));
+  }, [dispatch]);
 
   useEffect(() => {
-    if (!_.isEmpty(users)) {
-      database.ref("files").once("value", (data) => {
-        let result = [];
-        Object.keys(data.val()).forEach((key) => {
-          const file = data.val()[key];
-          if (file.date.match(moment().format("YYYY-MM-DD"))) {
-            result = result.concat(users[file.user].name);
-          }
-        });
-
-        let notResults = [];
-        Object.keys(users).forEach((key) => {
-          if (!result.includes(users[key].name)) {
-            notResults = notResults.concat(users[key].name);
-          }
-        });
-        setComplates(result);
-        setNotComplates(notResults);
-      });
+    if (files.status === SUCCESS) {
+      setComplates(
+        users.data.filter((user) =>
+          files.data.map((file) => file.user).includes(user.github)
+        )
+      );
+      setNotComplates(
+        users.data.filter(
+          (user) => !files.data.map((file) => file.user).includes(user.github)
+        )
+      );
     }
-  }, [database, users]);
+  }, [dispatch, users, files]);
 
   return (
     <Container>
@@ -51,7 +46,9 @@ export default () => {
                 {moment().format("YYYY-MM-DD")} 미달성 {notComplates.length}
               </Card.Title>
               {notComplates.map((notComplate) => (
-                <Card.Text>{notComplate}</Card.Text>
+                <Card.Text key={notComplate.github}>
+                  {notComplate.name}
+                </Card.Text>
               ))}
             </Card.Body>
           </Card>
@@ -63,7 +60,7 @@ export default () => {
                 {moment().format("YYYY-MM-DD")} 달성 {complates.length}
               </Card.Title>
               {complates.map((complate) => (
-                <Card.Text>{complate}</Card.Text>
+                <Card.Text key={complate.github}>{complate.name}</Card.Text>
               ))}
             </Card.Body>
           </Card>

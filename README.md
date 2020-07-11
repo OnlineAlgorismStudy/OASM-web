@@ -16,6 +16,13 @@
 - TypeScript ~3.7.2
 - GitHub Actions
 
+## 실행 방법
+
+```.bash
+yarn
+yarn start
+```
+
 ## 작업자
 
 <a href="https://github.com/joungsik">
