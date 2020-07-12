@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@joungsik/react-calendar-month-view": "https://github.com/JoungSik/react-calendar-month-view",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -20,7 +21,8 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
-    "redux-saga": "^1.1.3"
+    "redux-saga": "^1.1.3",
+    "styled-components": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
