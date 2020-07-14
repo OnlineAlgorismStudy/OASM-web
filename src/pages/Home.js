@@ -81,7 +81,11 @@ export default () => {
               )} */}
               {complates.map((complate) => (
                 <a href={"https://google.com"}>
-                  <Badge key={complate.github} variant="primary">
+                  <Badge
+                    style={{ fontSize: 18 }}
+                    key={complate.github}
+                    variant="primary"
+                  >
                     {complate.name}
                   </Badge>{" "}
                 </a>
