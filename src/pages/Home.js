@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Modal, Button, Spinner } from "react-bootstrap";
+import { Container, Modal, Button, Spinner, Badge } from "react-bootstrap";
 import CalendarMonthView from "@joungsik/react-calendar-month-view";
 import moment from "moment";
 
@@ -74,8 +74,17 @@ export default () => {
                 {notComplates.map((notComplate) => notComplate.name).join(", ")}
               </p>
               <p style={{ color: "blue" }}>달성자</p>
+              {/* {complates.map((complate) =>
+                console.log(
+                  files.data.find((file) => file.user === complate.github)
+                )
+              )} */}
               {complates.map((complate) => (
-                <p key={complate.github}>{complate.name}</p>
+                <a href={"https://google.com"}>
+                  <Badge key={complate.github} variant="primary">
+                    {complate.name}
+                  </Badge>{" "}
+                </a>
               ))}
             </>
           )}
