@@ -4,14 +4,26 @@ import CalendarMonthView from "@joungsik/react-calendar-month-view";
 import moment from "moment";
 
 import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+
 import { SUCCESS } from "utils/redux";
 import { userAction } from "redux/modules/user";
-import { fileAction } from "redux/modules/file";
-import styled from "styled-components";
+import { fileAction, originFileAction } from "redux/modules/file";
+
+import image from "assets/images/good.png";
 
 const Day = styled.div`
   background-color: white;
   border: 0.25px solid #f8f8f8;
+  text-align: center;
+`;
+
+const Image = styled.img`
+  width: 80%;
+  height: 80%;
+  margin-top: 10%;
+  background-size: contain;
+  background-image: url(${image});
 `;
 
 export default () => {
@@ -21,24 +33,31 @@ export default () => {
 
   const users = useSelector((store) => store.user.users);
   const files = useSelector((store) => store.file.files);
+  const originFiles = useSelector((store) => store.file.origin);
+
   const [complates, setComplates] = useState([]);
   const [notComplates, setNotComplates] = useState([]);
 
   useEffect(() => {
     dispatch(userAction());
+    dispatch(originFileAction());
   }, [dispatch]);
 
   useEffect(() => {
     if (files.status === SUCCESS) {
       setComplates(
-        users.data.filter((user) =>
-          files.data.map((file) => file.user).includes(user.github)
-        )
+        users.data
+          .filter((user) =>
+            files.data.map((file) => file.user).includes(user.key)
+          )
+          .map((user) => user.value)
       );
       setNotComplates(
-        users.data.filter(
-          (user) => !files.data.map((file) => file.user).includes(user.github)
-        )
+        users.data
+          .filter(
+            (user) => !files.data.map((file) => file.user).includes(user.key)
+          )
+          .map((user) => user.value)
       );
     }
   }, [dispatch, users, files]);
@@ -74,18 +93,14 @@ export default () => {
                 {notComplates.map((notComplate) => notComplate.name).join(", ")}
               </p>
               <p style={{ color: "blue" }}>달성자</p>
-              {/* {complates.map((complate) =>
-                console.log(
-                  files.data.find((file) => file.user === complate.github)
-                )
-              )} */}
               {complates.map((complate) => (
-                <a href={"https://google.com"}>
-                  <Badge
-                    style={{ fontSize: 18 }}
-                    key={complate.github}
-                    variant="primary"
-                  >
+                <a
+                  key={complate.github}
+                  href={"https://github.com/OnlineAlgorismStudy/OnAlSt"}
+                  target={"_blank"}
+                  rel="noopener noreferrer"
+                >
+                  <Badge style={{ fontSize: 18 }} variant="primary">
                     {complate.name}
                   </Badge>{" "}
                 </a>
@@ -94,10 +109,22 @@ export default () => {
           )}
         </Modal.Body>
       </Modal>
-      <CalendarMonthView
-        dayNameTextStyle={{ textAlign: "center" }}
-        renderDay={(args) => <Day date={args} onClick={() => getFiles(args)} />}
-      />
+      {originFiles.status === SUCCESS && (
+        <CalendarMonthView
+          dayNameTextStyle={{ textAlign: "center" }}
+          renderDay={(args) => (
+            <Day date={args} onClick={() => getFiles(args)}>
+              {originFiles.data.map(
+                (files) =>
+                  files.key === moment(args).format("YYYY-MM-DD") &&
+                  Object.keys(files.value).length === users.data.length && (
+                    <Image key={files.key} />
+                  )
+              )}
+            </Day>
+          )}
+        />
+      )}
     </Container>
   );
 };

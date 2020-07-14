@@ -14,12 +14,10 @@ import firebase from "utils/firebase";
 const getFiles = async (data) =>
   await firebase
     .database()
-    .ref("files")
+    .ref(`files/${data.date}`)
     .once("value")
     .then((result) => ({
-      data: Object.values(result.val()).filter((file) =>
-        file.date.match(data.date)
-      ),
+      data: Object.values(result.val()),
     }));
 
 const getOriginFiles = async () =>
@@ -34,6 +32,7 @@ const getOriginFiles = async () =>
           key: key,
           value: result.val()[key],
         });
+        return [];
       });
       return {
         data: array,
