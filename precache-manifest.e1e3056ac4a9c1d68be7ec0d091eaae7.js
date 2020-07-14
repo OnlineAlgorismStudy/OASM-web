@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "69b5b42b53a6d312bf19ae9bc3a72cb0",
+    "revision": "c95e426360bb76fbbe07dfd632f808cd",
     "url": "/OASM-web/index.html"
   },
   {
-    "revision": "4565e9b5f3934ea04dad",
+    "revision": "ed8f4316c7313982d5bf",
     "url": "/OASM-web/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "eff50415e912ace2e96e",
+    "revision": "fd2a6199c14a0105bc32",
     "url": "/OASM-web/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "4565e9b5f3934ea04dad",
-    "url": "/OASM-web/static/js/2.570a416d.chunk.js"
+    "revision": "ed8f4316c7313982d5bf",
+    "url": "/OASM-web/static/js/2.7bc0dfae.chunk.js"
   },
   {
     "revision": "df2659f20723d9e518ad965c595b69ee",
-    "url": "/OASM-web/static/js/2.570a416d.chunk.js.LICENSE.txt"
+    "url": "/OASM-web/static/js/2.7bc0dfae.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "eff50415e912ace2e96e",
-    "url": "/OASM-web/static/js/main.23eeca1d.chunk.js"
+    "revision": "fd2a6199c14a0105bc32",
+    "url": "/OASM-web/static/js/main.165861c7.chunk.js"
   },
   {
     "revision": "f913f4c1e0e674faed05",
