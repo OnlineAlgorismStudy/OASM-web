@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/OASM-web/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/OASM-web/static/js/main.165861c7.chunk.js",
-    "main.js.map": "/OASM-web/static/js/main.165861c7.chunk.js.map",
+    "main.js": "/OASM-web/static/js/main.ae206eb0.chunk.js",
+    "main.js.map": "/OASM-web/static/js/main.ae206eb0.chunk.js.map",
     "runtime-main.js": "/OASM-web/static/js/runtime-main.c07762c1.js",
     "runtime-main.js.map": "/OASM-web/static/js/runtime-main.c07762c1.js.map",
     "static/css/2.af3c1da9.chunk.css": "/OASM-web/static/css/2.af3c1da9.chunk.css",
     "static/js/2.7bc0dfae.chunk.js": "/OASM-web/static/js/2.7bc0dfae.chunk.js",
     "static/js/2.7bc0dfae.chunk.js.map": "/OASM-web/static/js/2.7bc0dfae.chunk.js.map",
     "index.html": "/OASM-web/index.html",
-    "precache-manifest.e1e3056ac4a9c1d68be7ec0d091eaae7.js": "/OASM-web/precache-manifest.e1e3056ac4a9c1d68be7ec0d091eaae7.js",
+    "precache-manifest.eff1676f3c980b143ae02517f97cf306.js": "/OASM-web/precache-manifest.eff1676f3c980b143ae02517f97cf306.js",
     "service-worker.js": "/OASM-web/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/OASM-web/static/css/2.af3c1da9.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/OASM-web/static/css/main.5ecd60fb.chunk.css.map",
@@ -23,6 +23,6 @@
     "static/css/2.af3c1da9.chunk.css",
     "static/js/2.7bc0dfae.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.165861c7.chunk.js"
+    "static/js/main.ae206eb0.chunk.js"
   ]
 }
