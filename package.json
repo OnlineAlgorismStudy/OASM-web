@@ -1,6 +1,6 @@
 {
   "name": "oasm",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@joungsik/react-calendar-month-view": "https://github.com/JoungSik/react-calendar-month-view",
