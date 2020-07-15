@@ -1,39 +1,38 @@
 import { call, take, fork, all } from "redux-saga/effects";
-import {
-  FILE,
-  FILE_MON,
-  FILE_TUE,
-  FILE_WED,
-  FILE_THU,
-  FILE_FRI,
-  fileEntity,
-  fileMonEntity,
-  fileTueEntity,
-  fileWedEntity,
-  fileThuEntity,
-  fileFriEntity,
-} from "redux/modules/file";
+import { FILE, fileEntity, ORIGIN, originFileEntity } from "redux/modules/file";
 import { fetchEntity } from "utils/saga";
 import firebase from "utils/firebase";
 
 const getFiles = async (data) =>
   await firebase
     .database()
-    .ref("files")
+    .ref(`files/${data.date}`)
     .once("value")
     .then((result) => ({
-      data: Object.values(result.val()).filter((file) =>
-        file.date.match(data.date)
-      ),
+      data: Object.values(result.val()),
     }));
 
-const getFilesSaga = fetchEntity(fileEntity, getFiles);
+const getOriginFiles = async () =>
+  await firebase
+    .database()
+    .ref("files")
+    .once("value")
+    .then((result) => {
+      const array = [];
+      Object.keys(result.val()).map((key) => {
+        array.push({
+          key: key,
+          value: result.val()[key],
+        });
+        return [];
+      });
+      return {
+        data: array,
+      };
+    });
 
-const getMonFilesSaga = fetchEntity(fileMonEntity, getFiles);
-const getTueFilesSaga = fetchEntity(fileTueEntity, getFiles);
-const getWedFilesSaga = fetchEntity(fileWedEntity, getFiles);
-const getThuFilesSaga = fetchEntity(fileThuEntity, getFiles);
-const getFriFilesSaga = fetchEntity(fileFriEntity, getFiles);
+const getFilesSaga = fetchEntity(fileEntity, getFiles);
+const getOriginFilesSaga = fetchEntity(originFileEntity, getOriginFiles);
 
 function* watchGetFiles() {
   while (true) {
@@ -42,48 +41,13 @@ function* watchGetFiles() {
   }
 }
 
-function* watchGetMonFiles() {
+function* watchGetOriginFiles() {
   while (true) {
-    const { payload } = yield take(FILE_MON);
-    yield call(getMonFilesSaga, payload);
-  }
-}
-
-function* watchGetTueFiles() {
-  while (true) {
-    const { payload } = yield take(FILE_TUE);
-    yield call(getTueFilesSaga, payload);
-  }
-}
-
-function* watchGetWedFiles() {
-  while (true) {
-    const { payload } = yield take(FILE_WED);
-    yield call(getWedFilesSaga, payload);
-  }
-}
-
-function* watchGetThuFiles() {
-  while (true) {
-    const { payload } = yield take(FILE_THU);
-    yield call(getThuFilesSaga, payload);
-  }
-}
-
-function* watchGetFriFiles() {
-  while (true) {
-    const { payload } = yield take(FILE_FRI);
-    yield call(getFriFilesSaga, payload);
+    const { payload } = yield take(ORIGIN);
+    yield call(getOriginFilesSaga, payload);
   }
 }
 
 export default function* rootSaga() {
-  yield all([
-    fork(watchGetFiles),
-    fork(watchGetMonFiles),
-    fork(watchGetTueFiles),
-    fork(watchGetWedFiles),
-    fork(watchGetThuFiles),
-    fork(watchGetFriFiles),
-  ]);
+  yield all([fork(watchGetFiles), fork(watchGetOriginFiles)]);
 }

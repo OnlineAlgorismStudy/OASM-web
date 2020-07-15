@@ -8,7 +8,19 @@ const getUsers = async () =>
     .database()
     .ref("users")
     .once("value")
-    .then((result) => ({ data: Object.values(result.val()) }));
+    .then((result) => {
+      const array = [];
+      Object.keys(result.val()).map((key) => {
+        array.push({
+          key: key,
+          value: result.val()[key],
+        });
+        return [];
+      });
+      return {
+        data: array,
+      };
+    });
 
 const getUsersSaga = fetchEntity(userEntity, getUsers);
 

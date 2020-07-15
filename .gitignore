@@ -190,5 +190,6 @@ $RECYCLE.BIN/
 *.lnk
 
 build
+src/assets/oasm.json
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,osx,visualstudiocode,node,react
