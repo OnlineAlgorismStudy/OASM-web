@@ -96,7 +96,12 @@ export default () => {
               {complates.map((complate) => (
                 <a
                   key={complate.github}
-                  href={"https://github.com/OnlineAlgorismStudy/OnAlSt"}
+                  href={
+                    "https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/" +
+                    files.data.find(
+                      (file) => file.user.split("_")[0] === complate.key
+                    ).name
+                  }
                   target={"_blank"}
                   rel="noopener noreferrer"
                 >
