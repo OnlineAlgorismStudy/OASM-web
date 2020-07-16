@@ -1,5 +1,6 @@
 import { call, take, fork, all } from "redux-saga/effects";
 import { FILE, fileEntity, ORIGIN, originFileEntity } from "redux/modules/file";
+import _ from "lodash";
 import { fetchEntity } from "utils/saga";
 import firebase from "utils/firebase";
 
@@ -8,9 +9,13 @@ const getFiles = async (data) =>
     .database()
     .ref(`files/${data.date}`)
     .once("value")
-    .then((result) => ({
-      data: Object.values(result.val()),
-    }));
+    .then((result) =>
+      _.isEmpty(result.val())
+        ? { data: [] }
+        : {
+            data: Object.values(result.val()),
+          }
+    );
 
 const getOriginFiles = async () =>
   await firebase

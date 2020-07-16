@@ -64,6 +64,8 @@ export default () => {
 
   const getFiles = (date) => {
     setShow(true);
+    setComplates([]);
+    setNotComplates([]);
     dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
   };
 
@@ -98,9 +100,11 @@ export default () => {
                   key={complate.github}
                   href={
                     "https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/" +
-                    files.data.find(
-                      (file) => file.user.split("_")[0] === complate.key
-                    ).name
+                    JSON.stringify(
+                      files.data.find(
+                        (file) => file.user.split("_")[0] === complate.key
+                      ).name
+                    )
                   }
                   target={"_blank"}
                   rel="noopener noreferrer"
