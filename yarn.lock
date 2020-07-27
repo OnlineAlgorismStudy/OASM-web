@@ -1561,8 +1561,8 @@
     chalk "^3.0.0"
 
 "@joungsik/react-calendar-month-view@https://github.com/JoungSik/react-calendar-month-view":
-  version "0.6.2"
-  resolved "https://github.com/JoungSik/react-calendar-month-view#e0cdb949afe58ca1ff461d72259c297831b511cb"
+  version "0.6.3"
+  resolved "https://github.com/JoungSik/react-calendar-month-view#e6a182e38cda1aec3551b5affc99b622bf7dfc52"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

@@ -128,6 +128,14 @@ export default () => {
               )}
             </Day>
           )}
+          onClickDay={(day) =>
+            window.open(
+              `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/day${moment(
+                day
+              ).format("MMDD")}/${moment(day).format("MMDD")}.JPG`,
+              "_blank"
+            )
+          }
         />
       )}
     </Container>
