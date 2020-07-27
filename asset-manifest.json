@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/OASM-web/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/OASM-web/static/js/main.9e72f55d.chunk.js",
-    "main.js.map": "/OASM-web/static/js/main.9e72f55d.chunk.js.map",
+    "main.js": "/OASM-web/static/js/main.5b941d0e.chunk.js",
+    "main.js.map": "/OASM-web/static/js/main.5b941d0e.chunk.js.map",
     "runtime-main.js": "/OASM-web/static/js/runtime-main.c07762c1.js",
     "runtime-main.js.map": "/OASM-web/static/js/runtime-main.c07762c1.js.map",
     "static/css/2.af3c1da9.chunk.css": "/OASM-web/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.fbab025f.chunk.js": "/OASM-web/static/js/2.fbab025f.chunk.js",
-    "static/js/2.fbab025f.chunk.js.map": "/OASM-web/static/js/2.fbab025f.chunk.js.map",
+    "static/js/2.9da2b9df.chunk.js": "/OASM-web/static/js/2.9da2b9df.chunk.js",
+    "static/js/2.9da2b9df.chunk.js.map": "/OASM-web/static/js/2.9da2b9df.chunk.js.map",
     "index.html": "/OASM-web/index.html",
-    "precache-manifest.b50067b5f9ca2444931d361c270963cb.js": "/OASM-web/precache-manifest.b50067b5f9ca2444931d361c270963cb.js",
+    "precache-manifest.584466d85c5eb2e5ddc56a801d9394ec.js": "/OASM-web/precache-manifest.584466d85c5eb2e5ddc56a801d9394ec.js",
     "service-worker.js": "/OASM-web/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/OASM-web/static/css/2.af3c1da9.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/OASM-web/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.fbab025f.chunk.js.LICENSE.txt": "/OASM-web/static/js/2.fbab025f.chunk.js.LICENSE.txt",
+    "static/js/2.9da2b9df.chunk.js.LICENSE.txt": "/OASM-web/static/js/2.9da2b9df.chunk.js.LICENSE.txt",
     "static/media/good.png": "/OASM-web/static/media/good.8f4df9ee.png",
     "static/media/next_arrow.svg": "/OASM-web/static/media/next_arrow.5ecd1fcc.svg",
     "static/media/prev_arrow.svg": "/OASM-web/static/media/prev_arrow.d75ede37.svg"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.c07762c1.js",
     "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.fbab025f.chunk.js",
+    "static/js/2.9da2b9df.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.9e72f55d.chunk.js"
+    "static/js/main.5b941d0e.chunk.js"
   ]
 }
