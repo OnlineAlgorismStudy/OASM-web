@@ -38,33 +38,44 @@ export default () => {
   const [complates, setComplates] = useState([]);
   const [notComplates, setNotComplates] = useState([]);
 
-  useEffect(() => {
-    dispatch(userAction());
-    dispatch(originFileAction());
-  }, [dispatch]);
+  const onClickDay = (day) => {
+    window.open(
+      `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/month${moment(
+        day
+      ).format("MM")}/day${moment(day).format("MMDD")}/${moment(day).format(
+        "MMDD"
+      )}.JPG`,
+      "_blank"
+    );
+  };
 
-  useEffect(() => {
-    if (files.status === SUCCESS) {
-      setComplates(
-        users.data
-          .filter((user) =>
-            files.data.map((file) => file.user).includes(user.key)
-          )
-          .map((user) => user.value)
-      );
-      setNotComplates(
-        users.data
-          .filter(
-            (user) => !files.data.map((file) => file.user).includes(user.key)
-          )
-          .map((user) => user.value)
-      );
-    }
-  }, [dispatch, users, files]);
+  // useEffect(() => {
+  //   dispatch(userAction());
+  //   dispatch(originFileAction());
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (files.status === SUCCESS) {
+  //     setComplates(
+  //       users.data
+  //         .filter((user) =>
+  //           files.data.map((file) => file.user).includes(user.key)
+  //         )
+  //         .map((user) => user.value)
+  //     );
+  //     setNotComplates(
+  //       users.data
+  //         .filter(
+  //           (user) => !files.data.map((file) => file.user).includes(user.key)
+  //         )
+  //         .map((user) => user.value)
+  //     );
+  //   }
+  // }, [dispatch, users, files]);
 
   const getFiles = (date) => {
     setShow(true);
-    dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
+    // dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
   };
 
   return (
@@ -114,30 +125,21 @@ export default () => {
           )}
         </Modal.Body>
       </Modal>
-      {originFiles.status === SUCCESS && (
-        <CalendarMonthView
-          dayNameTextStyle={{ textAlign: "center" }}
-          renderDay={(args) => (
-            <Day date={args} onClick={() => getFiles(args)}>
-              {originFiles.data.map(
-                (files) =>
-                  files.key === moment(args).format("YYYY-MM-DD") &&
-                  Object.keys(files.value).length === users.data.length && (
-                    <Image key={files.key} />
-                  )
-              )}
-            </Day>
-          )}
-          onClickDay={(day) =>
-            window.open(
-              `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/day${moment(
-                day
-              ).format("MMDD")}/${moment(day).format("MMDD")}.JPG`,
-              "_blank"
-            )
-          }
-        />
-      )}
+      <CalendarMonthView
+        dayNameTextStyle={{ textAlign: "center" }}
+        renderDay={(args) => (
+          <Day date={args} onClick={() => getFiles(args)}>
+            {/* {originFiles.data.map(
+              (files) =>
+                files.key === moment(args).format("YYYY-MM-DD") &&
+                Object.keys(files.value).length === users.data.length && (
+                  <Image key={files.key} />
+                )
+            )} */}
+          </Day>
+        )}
+        onClickDay={onClickDay}
+      />
     </Container>
   );
 };
