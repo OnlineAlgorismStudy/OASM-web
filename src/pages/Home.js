@@ -49,6 +49,10 @@ export default () => {
     );
   };
 
+  useEffect(() => {
+    dispatch(fileAction({ date: moment().format("YYYY-MM-DD") }));
+  }, [dispatch]);
+
   // useEffect(() => {
   //   dispatch(userAction());
   //   dispatch(originFileAction());
