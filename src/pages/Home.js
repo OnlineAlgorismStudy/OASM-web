@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import { SUCCESS } from "utils/redux";
 import { userAction } from "redux/modules/user";
-import { fileAction, originFileAction } from "redux/modules/file";
+import { fileAction } from "redux/modules/file";
 
 import image from "assets/images/good.png";
 
@@ -31,27 +31,24 @@ export default () => {
 
   const [show, setShow] = useState(false);
 
+  const [date, setDate] = useState(null);
   const users = useSelector((store) => store.user.users);
   const files = useSelector((store) => store.file.files);
-  const originFiles = useSelector((store) => store.file.origin);
 
   const [complates, setComplates] = useState([]);
   const [notComplates, setNotComplates] = useState([]);
 
+  const getFilePath = (date, fileName) =>
+    `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/month${moment(
+      date
+    ).format("MM")}/day${moment(date).format("MMDD")}/${fileName}`;
+
   const onClickDay = (day) => {
     window.open(
-      `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/month${moment(
-        day
-      ).format("MM")}/day${moment(day).format("MMDD")}/${moment(day).format(
-        "MMDD"
-      )}.JPG`,
+      getFilePath(day, `${moment(day).format("MMDD")}.JPG`),
       "_blank"
     );
   };
-
-  useEffect(() => {
-    dispatch(fileAction({ date: moment().format("YYYY-MM-DD") }));
-  }, [dispatch]);
 
   // useEffect(() => {
   //   dispatch(userAction());
@@ -77,9 +74,16 @@ export default () => {
   //   }
   // }, [dispatch, users, files]);
 
+  useEffect(() => {
+    if (files.status === SUCCESS) {
+      setComplates(files.data);
+    }
+  }, [dispatch, files]);
+
   const getFiles = (date) => {
     setShow(true);
-    // dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
+    setDate(date);
+    dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
   };
 
   return (
@@ -110,13 +114,8 @@ export default () => {
               <p style={{ color: "blue" }}>달성자</p>
               {complates.map((complate) => (
                 <a
-                  key={complate.github}
-                  href={
-                    "https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/" +
-                    files.data.find(
-                      (file) => file.user.split("_")[0] === complate.key
-                    ).name
-                  }
+                  key={complate.name}
+                  href={getFilePath(date, complate.files[0].name)}
                   target={"_blank"}
                   rel="noopener noreferrer"
                 >

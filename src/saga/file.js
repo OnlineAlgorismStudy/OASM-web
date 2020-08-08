@@ -1,35 +1,32 @@
 import { all, fork } from "redux-saga/effects";
-import { FILE, fileEntity, ORIGIN, originFileEntity } from "redux/modules/file";
+import { FILE, fileEntity } from "redux/modules/file";
 import { fetchEntity, watchSaga } from "utils/saga";
-import database from "utils/firebase";
+import firebase from "utils/firebase";
 
 const getFiles = async (data) => {
-  let citiesRef = database
+  const users = [];
+  await firebase
+    .firestore()
     .collection("date")
-    .doc("2020-07-28")
-    .collection("users");
-
-  let users = [];
-  let allCities = citiesRef
+    .doc(data.date)
+    .collection("users")
     .get()
     .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        console.log(doc.id, doc.data());
-        users.push(doc.id);
-      });
+      snapshot.docs.map((doc) =>
+        users.push({
+          name: doc.id,
+          files: doc.data().files,
+        })
+      );
     })
     .catch((err) => {
       console.log("Error getting documents", err);
     });
+  return { data: users };
 };
-const getOriginFiles = () => {};
 
 const getFilesSaga = fetchEntity(fileEntity, getFiles);
-const getOriginFilesSaga = fetchEntity(originFileEntity, getOriginFiles);
 
 export default function* rootSaga() {
-  yield all([
-    fork(watchSaga(FILE, getFilesSaga)),
-    fork(watchSaga(ORIGIN, getOriginFilesSaga)),
-  ]);
+  yield all([fork(watchSaga(FILE, getFilesSaga))]);
 }
