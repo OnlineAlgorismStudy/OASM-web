@@ -11,11 +11,8 @@ const initialState = {
 };
 
 export const FILE = "file";
-
 export const fileAction = createAction(FILE);
-
 export const fileActions = baseApiActionType(fileAction);
-
 export const fileEntity = createEntity(fileActions);
 
 export default handleActions(

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Modal, Button, Spinner, Badge } from "react-bootstrap";
 import CalendarMonthView from "@joungsik/react-calendar-month-view";
 import moment from "moment";
+import _ from "lodash";
 
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -50,35 +51,33 @@ export default () => {
     );
   };
 
-  // useEffect(() => {
-  //   dispatch(userAction());
-  //   dispatch(originFileAction());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (files.status === SUCCESS) {
-  //     setComplates(
-  //       users.data
-  //         .filter((user) =>
-  //           files.data.map((file) => file.user).includes(user.key)
-  //         )
-  //         .map((user) => user.value)
-  //     );
-  //     setNotComplates(
-  //       users.data
-  //         .filter(
-  //           (user) => !files.data.map((file) => file.user).includes(user.key)
-  //         )
-  //         .map((user) => user.value)
-  //     );
-  //   }
-  // }, [dispatch, users, files]);
+  useEffect(() => {
+    dispatch(userAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (files.status === SUCCESS) {
-      setComplates(files.data);
+    if (users.status === SUCCESS && files.status === SUCCESS) {
+      setComplates(
+        files.data.map((file) => {
+          const user = users.data.find((user) => user.github === file.name);
+          if (!_.isEmpty(user)) {
+            return {
+              name: user.name,
+              files: file.files,
+            };
+          } else {
+            return file;
+          }
+        })
+      );
+      setNotComplates(
+        users.data.filter((user) => {
+          const file = files.data.find((file) => file.name === user.github);
+          return _.isEmpty(file);
+        })
+      );
     }
-  }, [dispatch, files]);
+  }, [dispatch, files, users]);
 
   const getFiles = (date) => {
     setShow(true);
@@ -105,7 +104,7 @@ export default () => {
           {files.status !== SUCCESS && (
             <Spinner animation="grow" variant="dark" />
           )}
-          {files.status === SUCCESS && (
+          {users.status === SUCCESS && files.status === SUCCESS && (
             <>
               <p style={{ color: "red" }}>미 달성자</p>
               <p>
