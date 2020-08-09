@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Container, Modal, Button, Spinner, Badge } from "react-bootstrap";
 import CalendarMonthView from "@joungsik/react-calendar-month-view";
 import moment from "moment";
+import _ from "lodash";
 
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { SUCCESS } from "utils/redux";
 import { userAction } from "redux/modules/user";
-import { fileAction, originFileAction } from "redux/modules/file";
+import { fileAction, monthlyFileAction } from "redux/modules/file";
 
 import image from "assets/images/good.png";
 
@@ -31,41 +32,60 @@ export default () => {
 
   const [show, setShow] = useState(false);
 
+  const [date, setDate] = useState(null);
+  const [month, setMonth] = useState(moment().format("MM"));
+
   const users = useSelector((store) => store.user.users);
   const files = useSelector((store) => store.file.files);
-  const originFiles = useSelector((store) => store.file.origin);
+  const monthlyFiles = useSelector((store) => store.file.monthlyFiles);
 
   const [complates, setComplates] = useState([]);
   const [notComplates, setNotComplates] = useState([]);
 
+  const getFilePath = (date, fileName) =>
+    `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/month${moment(
+      date
+    ).format("MM")}/day${moment(date).format("MMDD")}/${fileName}`;
+
+  const onClickDay = (day) => {
+    window.open(
+      getFilePath(day, `${moment(day).format("MMDD")}.JPG`),
+      "_blank"
+    );
+  };
+
   useEffect(() => {
     dispatch(userAction());
-    dispatch(originFileAction());
+    dispatch(monthlyFileAction(month));
   }, [dispatch]);
 
   useEffect(() => {
-    if (files.status === SUCCESS) {
+    if (users.status === SUCCESS && files.status === SUCCESS) {
       setComplates(
-        users.data
-          .filter((user) =>
-            files.data.map((file) => file.user).includes(user.key)
-          )
-          .map((user) => user.value)
+        files.data.map((file) => {
+          const user = users.data.find((user) => user.github === file.name);
+          if (!_.isEmpty(user)) {
+            return {
+              name: user.name,
+              files: file.files,
+            };
+          } else {
+            return file;
+          }
+        })
       );
       setNotComplates(
-        users.data
-          .filter(
-            (user) => !files.data.map((file) => file.user).includes(user.key)
-          )
-          .map((user) => user.value)
+        users.data.filter((user) => {
+          const file = files.data.find((file) => file.name === user.github);
+          return _.isEmpty(file);
+        })
       );
     }
-  }, [dispatch, users, files]);
+  }, [dispatch, files, users]);
 
   const getFiles = (date) => {
     setShow(true);
-    setComplates([]);
-    setNotComplates([]);
+    setDate(date);
     dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
   };
 
@@ -88,7 +108,7 @@ export default () => {
           {files.status !== SUCCESS && (
             <Spinner animation="grow" variant="dark" />
           )}
-          {files.status === SUCCESS && (
+          {users.status === SUCCESS && files.status === SUCCESS && (
             <>
               <p style={{ color: "red" }}>미 달성자</p>
               <p>
@@ -97,13 +117,8 @@ export default () => {
               <p style={{ color: "blue" }}>달성자</p>
               {complates.map((complate) => (
                 <a
-                  key={complate.github}
-                  href={
-                    "https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/" +
-                      files.data.find(
-                        (file) => file.user.split("_")[0] === complate.key
-                      ).name
-                  }
+                  key={complate.name}
+                  href={getFilePath(date, complate.files[0].name)}
                   target={"_blank"}
                   rel="noopener noreferrer"
                 >
@@ -116,30 +131,20 @@ export default () => {
           )}
         </Modal.Body>
       </Modal>
-      {originFiles.status === SUCCESS && (
-        <CalendarMonthView
-          dayNameTextStyle={{ textAlign: "center" }}
-          renderDay={(args) => (
-            <Day date={args} onClick={() => getFiles(args)}>
-              {originFiles.data.map(
-                (files) =>
-                  files.key === moment(args).format("YYYY-MM-DD") &&
-                  Object.keys(files.value).length === users.data.length && (
-                    <Image key={files.key} />
-                  )
+      <CalendarMonthView
+        dayNameTextStyle={{ textAlign: "center" }}
+        renderDay={(args) => (
+          <Day date={args} onClick={() => getFiles(args)}>
+            {monthlyFiles.status === SUCCESS &&
+              monthlyFiles.data.map(
+                (data) =>
+                  data.date === moment(args).format("YYYY-MM-DD") &&
+                  data.length === users.data.length && <Image key={files.key} />
               )}
-            </Day>
-          )}
-          onClickDay={(day) =>
-            window.open(
-              `https://github.com/OnlineAlgorismStudy/OnAlSt/blob/master/src/question/day${moment(
-                day
-              ).format("MMDD")}/${moment(day).format("MMDD")}.JPG`,
-              "_blank"
-            )
-          }
-        />
-      )}
+          </Day>
+        )}
+        onClickDay={onClickDay}
+      />
     </Container>
   );
 };

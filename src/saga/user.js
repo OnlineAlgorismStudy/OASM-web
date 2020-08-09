@@ -1,36 +1,31 @@
-import { call, take, fork, all } from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
 import { USER, userEntity } from "redux/modules/user";
-import { fetchEntity } from "utils/saga";
+import { fetchEntity, watchSaga } from "utils/saga";
 import firebase from "utils/firebase";
 
-const getUsers = async () =>
+const getUsers = async () => {
+  const users = [];
   await firebase
-    .database()
-    .ref("users")
-    .once("value")
-    .then((result) => {
-      const array = [];
-      Object.keys(result.val()).map((key) => {
-        array.push({
-          key: key,
-          value: result.val()[key],
-        });
-        return [];
-      });
-      return {
-        data: array,
-      };
+    .firestore()
+    .collection("users")
+    .get()
+    .then((snapshot) => {
+      snapshot.docs.map((doc) =>
+        users.push({
+          name: doc.data().name,
+          github: doc.id,
+          state: doc.data().state,
+        })
+      );
+    })
+    .catch((err) => {
+      console.log("Error getting documents", err);
     });
+  return { data: users };
+};
 
 const getUsersSaga = fetchEntity(userEntity, getUsers);
 
-function* watchGetUsers() {
-  while (true) {
-    const { payload } = yield take(USER);
-    yield call(getUsersSaga, payload);
-  }
-}
-
 export default function* rootSaga() {
-  yield all([fork(watchGetUsers)]);
+  yield all([fork(watchSaga(USER, getUsersSaga))]);
 }
