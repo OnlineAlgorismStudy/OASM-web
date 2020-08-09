@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 import { SUCCESS } from "utils/redux";
 import { userAction } from "redux/modules/user";
-import { fileAction } from "redux/modules/file";
+import { fileAction, monthlyFileAction } from "redux/modules/file";
 
 import image from "assets/images/good.png";
 
@@ -33,8 +33,11 @@ export default () => {
   const [show, setShow] = useState(false);
 
   const [date, setDate] = useState(null);
+  const [month, setMonth] = useState(moment().format("MM"));
+
   const users = useSelector((store) => store.user.users);
   const files = useSelector((store) => store.file.files);
+  const monthlyFiles = useSelector((store) => store.file.monthlyFiles);
 
   const [complates, setComplates] = useState([]);
   const [notComplates, setNotComplates] = useState([]);
@@ -53,6 +56,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(userAction());
+    dispatch(monthlyFileAction(month));
   }, [dispatch]);
 
   useEffect(() => {
@@ -131,13 +135,12 @@ export default () => {
         dayNameTextStyle={{ textAlign: "center" }}
         renderDay={(args) => (
           <Day date={args} onClick={() => getFiles(args)}>
-            {/* {originFiles.data.map(
-              (files) =>
-                files.key === moment(args).format("YYYY-MM-DD") &&
-                Object.keys(files.value).length === users.data.length && (
-                  <Image key={files.key} />
-                )
-            )} */}
+            {monthlyFiles.status === SUCCESS &&
+              monthlyFiles.data.map(
+                (data) =>
+                  data.date === moment(args).format("YYYY-MM-DD") &&
+                  data.length === users.data.length && <Image key={files.key} />
+              )}
           </Day>
         )}
         onClickDay={onClickDay}
