@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "a002179cb7ec55b7278a1d14774ba0b9",
+    "revision": "d53e859cf473705b3189add295e68ef2",
     "url": "/OASM-web/index.html"
   },
   {
-    "revision": "4189a2560b5a46d12153",
+    "revision": "9d1a7d4d53063993fdeb",
     "url": "/OASM-web/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "98a2644f2e8947d802a4",
+    "revision": "5e8754251bd5235a4735",
     "url": "/OASM-web/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "4189a2560b5a46d12153",
-    "url": "/OASM-web/static/js/2.9da2b9df.chunk.js"
+    "revision": "9d1a7d4d53063993fdeb",
+    "url": "/OASM-web/static/js/2.51a5ec7b.chunk.js"
   },
   {
-    "revision": "edf315e69a5f5d07e2e2ba8c1f814fbe",
-    "url": "/OASM-web/static/js/2.9da2b9df.chunk.js.LICENSE.txt"
+    "revision": "00af2497df1d27ed55376662eda6cb1b",
+    "url": "/OASM-web/static/js/2.51a5ec7b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "98a2644f2e8947d802a4",
-    "url": "/OASM-web/static/js/main.5b941d0e.chunk.js"
+    "revision": "5e8754251bd5235a4735",
+    "url": "/OASM-web/static/js/main.d7ce28a5.chunk.js"
   },
   {
     "revision": "f913f4c1e0e674faed05",
