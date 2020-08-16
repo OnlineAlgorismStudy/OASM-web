@@ -139,7 +139,7 @@ export default () => {
               monthlyFiles.data.map(
                 (data) =>
                   data.date === moment(args).format("YYYY-MM-DD") &&
-                  data.length === users.data.length && <Image key={files.key} />
+                  data.length >= users.data.length && <Image key={files.key} />
               )}
           </Day>
         )}

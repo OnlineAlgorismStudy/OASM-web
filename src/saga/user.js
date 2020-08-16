@@ -10,13 +10,15 @@ const getUsers = async () => {
     .collection("users")
     .get()
     .then((snapshot) => {
-      snapshot.docs.map((doc) =>
-        users.push({
-          name: doc.data().name,
-          github: doc.id,
-          state: doc.data().state,
-        })
-      );
+      snapshot.docs.map((doc) => {
+        if (doc.data().state !== 1) {
+          users.push({
+            name: doc.data().name,
+            github: doc.id,
+            state: doc.data().state,
+          });
+        }
+      });
     })
     .catch((err) => {
       console.log("Error getting documents", err);
