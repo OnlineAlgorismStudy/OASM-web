@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d53e859cf473705b3189add295e68ef2",
+    "revision": "d3b194135629f6412d293736699cfe87",
     "url": "/OASM-web/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/OASM-web/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "5e8754251bd5235a4735",
+    "revision": "4ed1b7338080b5de4a14",
     "url": "/OASM-web/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/OASM-web/static/js/2.51a5ec7b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5e8754251bd5235a4735",
-    "url": "/OASM-web/static/js/main.d7ce28a5.chunk.js"
+    "revision": "4ed1b7338080b5de4a14",
+    "url": "/OASM-web/static/js/main.b5f4a6f9.chunk.js"
   },
   {
     "revision": "f913f4c1e0e674faed05",
