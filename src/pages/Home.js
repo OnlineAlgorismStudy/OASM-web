@@ -48,10 +48,17 @@ export default () => {
     ).format("MM")}/day${moment(date).format("MMDD")}/${fileName}`;
 
   const onClickDay = (day) => {
-    window.open(
-      getFilePath(day, `${moment(day).format("MMDD")}.JPG`),
-      "_blank"
-    );
+    if (!isWeekend(day)) {
+      window.open(
+        getFilePath(day, `${moment(day).format("MMDD")}.JPG`),
+        "_blank"
+      );
+    }
+  };
+
+  const isWeekend = (day) => {
+    const weekday = moment(day).format("dddd");
+    return weekday === "Sunday" || weekday === "Saturday";
   };
 
   useEffect(() => {
@@ -87,7 +94,10 @@ export default () => {
   const getFiles = (date) => {
     setShow(true);
     setDate(date);
-    dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
+
+    if (!isWeekend(date)) {
+      dispatch(fileAction({ date: moment(date).format("YYYY-MM-DD") }));
+    }
   };
 
   return (
@@ -105,35 +115,43 @@ export default () => {
             Close
           </Button>
         </Modal.Header>
-        <Modal.Body style={{ textAlign: "center" }}>
-          {files.status !== SUCCESS && (
-            <Spinner animation="grow" variant="dark" />
-          )}
-          {users.status === SUCCESS && files.status === SUCCESS && (
-            <>
-              <p style={{ color: "red" }}>미 달성자</p>
-              <p>
-                {notComplates.map((notComplate) => notComplate.name).join(", ")}
-              </p>
-              <p style={{ color: "blue" }}>달성자</p>
-              {complates.map((complate) => (
-                <a
-                  key={complate.name}
-                  href={getFilePath(date, complate.files[0].name)}
-                  target={"_blank"}
-                  rel="noopener noreferrer"
-                >
-                  <Badge
-                    style={{ fontSize: 18, marginBottom: 2 }}
-                    variant={complate.state !== 1 ? "primary" : "warning"}
+        {isWeekend(date) ? (
+          <Modal.Body style={{ textAlign: "center" }}>
+            <p>주말에는 쉽니다</p>
+          </Modal.Body>
+        ) : (
+          <Modal.Body style={{ textAlign: "center" }}>
+            {files.status !== SUCCESS && (
+              <Spinner animation="grow" variant="dark" />
+            )}
+            {users.status === SUCCESS && files.status === SUCCESS && (
+              <>
+                <p style={{ color: "red" }}>미 달성자</p>
+                <p>
+                  {notComplates
+                    .map((notComplate) => notComplate.name)
+                    .join(", ")}
+                </p>
+                <p style={{ color: "blue" }}>달성자</p>
+                {complates.map((complate) => (
+                  <a
+                    key={complate.name}
+                    href={getFilePath(date, complate.files[0].name)}
+                    target={"_blank"}
+                    rel="noopener noreferrer"
                   >
-                    {complate.name}
-                  </Badge>{" "}
-                </a>
-              ))}
-            </>
-          )}
-        </Modal.Body>
+                    <Badge
+                      style={{ fontSize: 18, marginBottom: 2 }}
+                      variant={complate.state !== 1 ? "primary" : "warning"}
+                    >
+                      {complate.name}
+                    </Badge>{" "}
+                  </a>
+                ))}
+              </>
+            )}
+          </Modal.Body>
+        )}
       </Modal>
       <CalendarMonthView
         dayNameTextStyle={{ textAlign: "center" }}
