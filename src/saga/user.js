@@ -11,13 +11,11 @@ const getUsers = async () => {
     .get()
     .then((snapshot) => {
       snapshot.docs.map((doc) => {
-        if (doc.data().state !== 1) {
-          users.push({
-            name: doc.data().name,
-            github: doc.id,
-            state: doc.data().state,
-          });
-        }
+        users.push({
+          name: doc.data().name,
+          github: doc.id,
+          state: doc.data().state,
+        });
       });
     })
     .catch((err) => {

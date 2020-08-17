@@ -67,6 +67,7 @@ export default () => {
           if (!_.isEmpty(user)) {
             return {
               name: user.name,
+              state: user.state,
               files: file.files,
             };
           } else {
@@ -77,7 +78,7 @@ export default () => {
       setNotComplates(
         users.data.filter((user) => {
           const file = files.data.find((file) => file.name === user.github);
-          return _.isEmpty(file);
+          return user.state !== 1 && _.isEmpty(file);
         })
       );
     }
@@ -122,7 +123,10 @@ export default () => {
                   target={"_blank"}
                   rel="noopener noreferrer"
                 >
-                  <Badge style={{ fontSize: 18 }} variant="primary">
+                  <Badge
+                    style={{ fontSize: 18, marginBottom: 2 }}
+                    variant={complate.state !== 1 ? "primary" : "warning"}
+                  >
                     {complate.name}
                   </Badge>{" "}
                 </a>
@@ -139,7 +143,10 @@ export default () => {
               monthlyFiles.data.map(
                 (data) =>
                   data.date === moment(args).format("YYYY-MM-DD") &&
-                  data.length >= users.data.length && <Image key={files.key} />
+                  data.length >=
+                    users.data.filter((user) => user.state !== 1).length && (
+                    <Image key={files.key} />
+                  )
               )}
           </Day>
         )}
