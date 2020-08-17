@@ -18,13 +18,8 @@ jobs:
       - name: Install Packages
         run: yarn install
       - name: Build page
-        run: yarn run build
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
         env:
           APIKEY: ${{ secrets.APIKEY }}
           AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
           DATABASEURL: ${{ secrets.DATABASEURL }}
-        with:
-          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          publish_dir: ./build
+        run: yarn run deploy
